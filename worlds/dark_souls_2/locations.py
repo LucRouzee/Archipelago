@@ -35,7 +35,7 @@ class LocationData:
     missable: bool = False
     """Whether this location can become in some way unreachable by the player."""
 
-    keep_original_item: bool = False
+    keep_original_item: bool = True
     """Whether this location will keep it's original item."""
 
     original_item_name: str = field(init=False)
