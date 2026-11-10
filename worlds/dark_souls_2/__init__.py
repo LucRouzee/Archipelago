@@ -199,7 +199,9 @@ class DarkSouls2World(World):
         # We do this now instead of before the previous step because
         # if we did it before we would get two of any progression item
         # that isn't unique, which is not something we really want
-        missing_progression_items = [
+        # In vanilla mode every physical location is locked to its original item.
+        # There are consequently no unfilled slots for progression items to occupy.
+        missing_progression_items = [] if max_pool_size == 0 else [
             item.name for item in item_list
             if item.name not in items_added
             and item.classification == ItemClassification.progression
