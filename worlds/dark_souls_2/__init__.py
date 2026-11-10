@@ -180,7 +180,7 @@ class DarkSouls2World(World):
             item_data = item_dictionary[location.data.original_item_name]
 
             if location.data.keep_original_item:
-                location.place_locked_item(self.create_item(location.data.original_item_name))
+                location.place_locked_item(self.create_item(location.data.original_item_name, vanilla=True))
                 items_added.append(location.data.original_item_name)
                 max_pool_size -= 1
                 continue
@@ -297,10 +297,10 @@ class DarkSouls2World(World):
                 )
 
 
-    def create_item(self, name: str) -> DS2Item:
+    def create_item(self, name: str, vanilla: bool = False) -> DS2Item:
         item_data: ItemData = item_dictionary[name]
 
-        if item_data.max_reinforcement > 0 and self.random.randint(0, 99) < self.options.randomize_equipment_level_percentage:
+        if not vanilla and item_data.max_reinforcement > 0 and self.random.randint(0, 99) < self.options.randomize_equipment_level_percentage:
             if item_data.max_reinforcement == 5:
                 min_reinforcement = self.options.min_equipment_reinforcement_in_5
                 max_reinforcement = self.options.max_equipment_reinforcement_in_5
